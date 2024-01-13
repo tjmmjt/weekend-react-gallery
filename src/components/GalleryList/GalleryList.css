@@ -1,3 +1,7 @@
+.gallery {
+    text-align: center;
+}
+
 .mainGalleryDiv {
     display: flex;
     flex-wrap: wrap;
@@ -5,7 +9,6 @@
 }
 
 .galleryItem {
-    
     margin: 3rem;
 }
 
@@ -18,6 +21,16 @@
     margin: 0 5px;
 }
 
-.galleryItem img {
-    border-radius: 10px;
+.photoDiv img {
+    width: 150px;
+    border-radius: 5px;
+}
+
+.clickedDiv {
+    background-color: rgb(219, 219, 219);
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px 3px;
 }

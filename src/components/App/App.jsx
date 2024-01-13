@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import GalleryList from "../GalleryList/GalleryList";
 import axios from "axios";
+import GalleryItem from "../GalleryItem/GalleryItem";
 
 function App() {
   // need GET fn to get gallery list and setGalleryList
@@ -35,6 +36,9 @@ function App() {
 
       <p>The gallery goes here!</p>
       <GalleryList galleryList={galleryList} />
+
+      
+      <GalleryItem />
     </div>
   );
 }
