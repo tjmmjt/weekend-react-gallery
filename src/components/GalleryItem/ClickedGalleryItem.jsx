@@ -7,13 +7,12 @@ import "./GalleryItem.css";
 // Displays a gallery item's current number likes.
 // Contains a "like" button that, when clicked, will fire off a PUT /api/gallery/like/:id request.
 
-const GalleryItem = ({ photo }) => {
+const ClickedGalleryItem = ({ photo }) => {
   // Gallery Item
-
   return (
     <>
-      <div className="photoDiv">
-        <img src={photo.url} alt={photo.description} />
+      <div className="clickedDiv">
+        <p>{photo.description}</p>
       </div>
       <div className="likesDiv">
         <div id="like">❤️</div>
@@ -23,4 +22,4 @@ const GalleryItem = ({ photo }) => {
   );
 };
 
-export default GalleryItem;
+export default ClickedGalleryItem;

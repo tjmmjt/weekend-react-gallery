@@ -6,27 +6,6 @@ import GalleryItem from "../GalleryItem/GalleryItem";
 
 function App() {
   // need GET fn to get gallery list and setGalleryList
-  const [galleryList, setGalleryList] = useState([]);
-
-  useEffect(() => {
-    handleGet();
-  }, []);
-
-  const handleGet = () => {
-    console.log("In handleGet()");
-
-    axios
-      .get("/api/gallery")
-      .then((response) => {
-        console.log("Response Data:", response.data);
-        setGalleryList(response.data);
-      })
-      .catch((err) => {
-        alert("Error getting Gallery");
-      });
-  };
-
-  console.log("galleryList:", galleryList);
 
   return (
     <div data-testid="app">
@@ -35,10 +14,8 @@ function App() {
       </header>
 
       <p>The gallery goes here!</p>
-      <GalleryList galleryList={galleryList} />
+      <GalleryList />
 
-      
-      <GalleryItem />
     </div>
   );
 }

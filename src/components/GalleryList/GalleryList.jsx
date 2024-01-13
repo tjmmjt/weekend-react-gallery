@@ -1,42 +1,54 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import './GalleryList.css'
+import GalleryItem from '../GalleryItem/GalleryItem';
+import ClickedGalleryItem from '../GalleryItem/ClickedGalleryItem';
 
-const GalleryList = (
-    {galleryList}
-    ) => {
+const GalleryList = () => {
     console.log("in GalleryList()");
+    // ! STATE
+    const [galleryList, setGalleryList] = useState([]);
+    const [imgToggle, setImgToggle] = useState(false);
+
+    // useEffect()
+    useEffect(() => {
+      handleGet();
+    }, []);
+    
+    // ! GET gallery items
+    const handleGet = () => {
+      console.log("In handleGet()");
+      axios
+        .get("/api/gallery")
+        .then((response) => {
+          console.log("Response Data:", response.data);
+          setGalleryList(response.data);
+        })
+        .catch((err) => {
+          alert("Error getting Gallery");
+        });
+    };
+
+    console.log("Gallery List: ", galleryList)
+
+    const toggleImg = () => {
+        console.log("clicked");
+        {imgToggle ? setImgToggle(false) : setImgToggle(true)}
+    };
+
+    console.log("imgToggle:", imgToggle);
 
     return(
         <>
-        <div className="gallery">
-            <div className="galleryHeader">
-                <h2>Gallery List</h2>
-            </div>
-
             <div className="mainGalleryDiv">
-                {/* {JSON.stringify(galleryList)} */}
                 {galleryList.map((photo) => (
-                    <div className="galleryItem" key={photo.id}>
-                        {/* // ! if not clicked, display this */}
-                        <div className="clickedDiv">
-                            <p>{photo.description}</p>
-                        </div>
-                        <div className="likesDiv">
-                            <div id='like'>❤️</div>
-                            <div>{photo.likes}</div>
-                        </div>
-
-                        {/* // ! if clicked, display this */}
-                        <div className="photoDiv">
-                            <img src={photo.url} alt={photo.description} />
-                        </div>
-                        <div className="likesDiv">
-                            <div id='like'>❤️</div>
-                            <div>{photo.likes}</div>
-                        </div>
+                    <div onClick={toggleImg} className="galleryItem" key={photo.id}>
+                        {
+                        imgToggle ? <GalleryItem photo={photo} /> : <ClickedGalleryItem photo={photo} />
+                        }
                     </div>
                 ))}
             </div>
-        </div>
         </>
     )
 }
