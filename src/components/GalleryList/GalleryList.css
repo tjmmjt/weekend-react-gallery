@@ -1,0 +1,23 @@
+.mainGalleryDiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.galleryItem {
+    
+    margin: 3rem;
+}
+
+.likesDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.likesDiv > * {
+    margin: 0 5px;
+}
+
+.galleryItem img {
+    border-radius: 10px;
+}
