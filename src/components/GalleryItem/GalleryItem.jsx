@@ -9,11 +9,34 @@ import "./GalleryItem.css";
 
 const GalleryItem = ({ photo }) => {
   // Gallery Item
+  const [imgToggle, setImgToggle] = useState(false);
 
+  const toggleImg = () => {
+    console.log("clicked");
+    {
+      imgToggle ? setImgToggle(false) : setImgToggle(true);
+    }
+  };
+  
+  console.log("imgToggle:", imgToggle);
+
+  if(imgToggle === false){
+    return (
+      <>
+        <div onClick={toggleImg} className="photoDiv">
+          <img src={photo.url} alt={photo.description} />
+        </div>
+        <div className="likesDiv">
+          <div id="like">❤️</div>
+          <div>{photo.likes}</div>
+        </div>
+      </>
+    );
+  } else if(imgToggle === true){
   return (
     <>
-      <div className="photoDiv">
-        <img src={photo.url} alt={photo.description} />
+      <div onClick={toggleImg} className="clickedDiv">
+        <p>{photo.description}</p>
       </div>
       <div className="likesDiv">
         <div id="like">❤️</div>
@@ -21,6 +44,7 @@ const GalleryItem = ({ photo }) => {
       </div>
     </>
   );
+  }
 };
 
 export default GalleryItem;

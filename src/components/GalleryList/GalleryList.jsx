@@ -8,7 +8,7 @@ const GalleryList = () => {
     console.log("in GalleryList()");
     // ! STATE
     const [galleryList, setGalleryList] = useState([]);
-    const [imgToggle, setImgToggle] = useState(false);
+
 
     // useEffect()
     useEffect(() => {
@@ -31,21 +31,12 @@ const GalleryList = () => {
 
     console.log("Gallery List: ", galleryList)
 
-    const toggleImg = () => {
-        console.log("clicked");
-        {imgToggle ? setImgToggle(false) : setImgToggle(true)}
-    };
-
-    console.log("imgToggle:", imgToggle);
-
     return(
         <>
             <div className="mainGalleryDiv">
                 {galleryList.map((photo) => (
-                    <div onClick={toggleImg} className="galleryItem" key={photo.id}>
-                        {
-                        imgToggle ? <GalleryItem photo={photo} /> : <ClickedGalleryItem photo={photo} />
-                        }
+                    <div className="galleryItem" key={photo.id}>
+                      <GalleryItem photo={photo} />
                     </div>
                 ))}
             </div>
