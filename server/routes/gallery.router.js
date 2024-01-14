@@ -24,7 +24,7 @@ router.put('/like/:id', (req, res) => {
 // GET /gallery
 router.get('/', (req, res) => {
   // declare queryText which will SELECT all from database to return to DOM
-  const queryText = `SELECT * FROM gallery;`
+  const queryText = `SELECT * FROM gallery ORDER BY id;`
   
   // send query w/ pool
   pool

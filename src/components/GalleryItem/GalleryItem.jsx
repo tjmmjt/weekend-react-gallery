@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import "./GalleryItem.css";
 
 // Will be used to display a single gallery item.
@@ -7,43 +8,71 @@ import "./GalleryItem.css";
 // Displays a gallery item's current number likes.
 // Contains a "like" button that, when clicked, will fire off a PUT /api/gallery/like/:id request.
 
-const GalleryItem = ({ photo }) => {
-  // Gallery Item
+// pass mapped (photo) as a prop
+const GalleryItem = ({ photo, handleGet }) => {
+  // STATE for an imgToggle option.
+  // If true, display img : if false, display description
   const [imgToggle, setImgToggle] = useState(false);
 
+  // function to toggle imgToggle to true and false onClick
+  // if imgToggle === true, set false : vice versa
   const toggleImg = () => {
-    console.log("clicked");
+    // console.log("clicked");
     {
       imgToggle ? setImgToggle(false) : setImgToggle(true);
     }
   };
-  
-  console.log("imgToggle:", imgToggle);
 
-  if(imgToggle === false){
+  // PUT function for upvoting img
+  // axios put(like/photo.id)
+  const likeImg = () => {
+    console.log("likeImg()");
+
+    axios
+      .put(`/api/gallery/like/${photo.id}`)
+      .then((response) => {
+        // console.log("PUT successful");
+        handleGet();
+      })
+      .catch((err) => {
+        alert("Error liking image");
+      });
+  };
+
+  // console.log("imgToggle:", imgToggle);
+
+  // ! Render
+  // if imgToggle false, return photo
+  // if imgToggle true, return description
+  // div for img or description, onClick toggleImg()
+  // below that div, display likesDiv
+  // likeDiv onClick, upvote img by calling put function
+  if (imgToggle === false) {
     return (
       <>
         <div onClick={toggleImg} className="photoDiv">
           <img src={photo.url} alt={photo.description} />
         </div>
         <div className="likesDiv">
-          <div id="like">❤️</div>
+          <div onClick={likeImg} id="like">
+            ❤️
+          </div>
           <div>{photo.likes}</div>
         </div>
       </>
     );
-  } else if(imgToggle === true){
-  return (
-    <>
-      <div onClick={toggleImg} className="clickedDiv">
-        <p>{photo.description}</p>
-      </div>
-      <div className="likesDiv">
-        <div id="like">❤️</div>
-        <div>{photo.likes}</div>
-      </div>
-    </>
-  );
+  } else if (imgToggle === true) {
+    return (
+      <>
+        <div onClick={toggleImg} className="clickedDiv">
+          <p>{photo.description}</p>
+        </div>
+        <div className="likesDiv">
+          <div onClick={likeImg} id="like">❤️</div>
+          <div>{photo.likes}</div>
+        </div>
+      </>
+    );
   }
 };
 

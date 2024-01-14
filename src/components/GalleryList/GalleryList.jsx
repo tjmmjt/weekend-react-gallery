@@ -2,26 +2,28 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './GalleryList.css'
 import GalleryItem from '../GalleryItem/GalleryItem';
-import ClickedGalleryItem from '../GalleryItem/ClickedGalleryItem';
 
 const GalleryList = () => {
     console.log("in GalleryList()");
     // ! STATE
+    // gets and sets gallery list only.
     const [galleryList, setGalleryList] = useState([]);
 
 
     // useEffect()
+    // onload, get gallery list
     useEffect(() => {
       handleGet();
     }, []);
     
     // ! GET gallery items
+    // get DB list, set STATE to response data
     const handleGet = () => {
-      console.log("In handleGet()");
+      // console.log("In handleGet()");
       axios
         .get("/api/gallery")
         .then((response) => {
-          console.log("Response Data:", response.data);
+          // console.log("Response Data:", response.data);
           setGalleryList(response.data);
         })
         .catch((err) => {
@@ -31,12 +33,17 @@ const GalleryList = () => {
 
     console.log("Gallery List: ", galleryList)
 
+    // return a div for the gallery container
+    // in the container, map over gallery list of (photos)
+    // return a galleryItem div for the photo w/ a unique key = photo.id
+    // within galleryItem, display GalleryItem component and pass the mapped (photo) as prop
+
     return(
         <>
             <div className="mainGalleryDiv">
                 {galleryList.map((photo) => (
                     <div className="galleryItem" key={photo.id}>
-                      <GalleryItem photo={photo} />
+                      <GalleryItem handleGet={handleGet} photo={photo} />
                     </div>
                 ))}
             </div>
