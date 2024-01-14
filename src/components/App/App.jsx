@@ -7,10 +7,9 @@ function App() {
   // need GET fn to get gallery list and setGalleryList
 
   return (
-    <div data-testid="app">
+    <div className="appBody" data-testid="app">
       <Header />
       <GalleryList />
-
     </div>
   );
 }
