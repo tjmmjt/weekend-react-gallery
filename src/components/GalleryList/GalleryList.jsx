@@ -40,9 +40,9 @@ const GalleryList = () => {
 
     return(
         <>
-            <div className="mainGalleryDiv">
+            <div className="mainGalleryDiv" data-testid="galleryList">
                 {galleryList.map((photo) => (
-                    <div className="galleryItem" key={photo.id}>
+                    <div className="galleryItem" key={photo.id} data-testid="galleryItem">
                       <GalleryItem handleGet={handleGet} photo={photo} />
                     </div>
                 ))}

@@ -50,13 +50,16 @@ const GalleryItem = ({ photo, handleGet }) => {
   if (imgToggle === false) {
     return (
       <>
-        <div onClick={toggleImg} className="photoDiv">
+      <div className="title">
+        <h4>{photo.title}</h4>
+      </div>
+      
+        <div onClick={toggleImg} className="photoDiv" data-testid="toggle">
           <img src={photo.url} alt={photo.description} />
         </div>
+
         <div className="likesDiv">
-          <div onClick={likeImg} id="like">
-            ❤️
-          </div>
+          <div onClick={likeImg} id="like" data-testid="like">❤️</div>
           <div>{photo.likes}</div>
         </div>
       </>
@@ -64,11 +67,16 @@ const GalleryItem = ({ photo, handleGet }) => {
   } else if (imgToggle === true) {
     return (
       <>
-        <div onClick={toggleImg} className="clickedDiv">
-          <p>{photo.description}</p>
+        <div className="title">
+          <h4>{photo.title}</h4>
         </div>
+        
+        <div onClick={toggleImg} className="clickedDiv" data-testid="toggle">
+          <p data-testid="description">{photo.description}</p>
+        </div>
+
         <div className="likesDiv">
-          <div onClick={likeImg} id="like">❤️</div>
+          <div onClick={likeImg} id="like" data-testid="like">❤️</div>
           <div>{photo.likes}</div>
         </div>
       </>

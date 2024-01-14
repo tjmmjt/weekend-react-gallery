@@ -8,6 +8,12 @@
     justify-content: center;
 }
 
+.title h4 {
+    text-align: center;
+    margin: 0.5rem 0;
+    padding: 0;
+}
+
 .galleryItem {
     margin: 3rem;
 }
